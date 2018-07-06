@@ -41,8 +41,11 @@ def random_command(bot, update, args):
         ordre = args[0]
         if (ordre == "total"):
             bot.send_message(chat_id=update.message.chat_id, reply_to_message_id=update.message.message_id, text="El nombre actual de mems és de " + str(len(files)) + ".")
+        elif (ordre == "spam"): # Sends all the memes. Be careful!
+            for (n, i) in enumerate(files):
+                f = open("memes/" + i, "rb")
+                bot.send_photo(chat_id=update.message.chat_id, photo=f, caption=n+1,reply_to_message_id=update.message.message_id)
     except:
-
         ran = random.choice(os.listdir("memes"))
         for (n, i) in enumerate(files):
             if (i == ran):
