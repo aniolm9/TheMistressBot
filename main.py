@@ -10,9 +10,13 @@ def main():
     f.close()
     updater = Updater(token=TOKEN)
     dispatcher = updater.dispatcher
+    jobqueue = updater.job_queue
 
     # Call the function that contains the handlers for the commands.
     functions.handlersProcess(updater, dispatcher)
+
+    # Call the function that controls the jobs.
+    functions.jobsManager(jobqueue)
 
 # Rock it
 main()

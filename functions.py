@@ -2,13 +2,20 @@ import commands
 import logging
 import os
 import handlers
-from bs4 import BeautifulSoup
+import datetime
+import jobs
 from telegram.ext import MessageHandler, CommandHandler
 
 def logs():
     logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
     logger = logging.getLogger(__name__)
     return logger
+
+def jobsManager(jobsqueue):
+    # Cine Ripoll job. Every Thursday at 08:30 download the schedule.
+    today = datetime.datetime(datetime.datetime.today().year, datetime.datetime.today().month, datetime.datetime.today().day, 8, 30, 0)
+    next_thursday = today + datetime.timedelta(days=(3-today.weekday())%7)
+    jobsqueue.run_repeating(jobs.getCineRipoll, interval=next_thursday)
 
 def handlersProcess(updater, dispatcher):
     # Dictionary containing all the command handlers
@@ -51,34 +58,3 @@ def memes():
     files = os.listdir("memes")
     files.sort(key=lambda x: os.stat(os.path.join("memes", x)).st_mtime)
     return files
-
-def getCineRipoll():
-        num = ""
-        url = "http://circuiturgellenc.com/bku/index.php/component/k2/item/61-cinema-comtal.html"
-        os.system("curl -s -o cine.html " + url)
-        p = open("cine.html")
-        web = BeautifulSoup(p, "html.parser")
-        while "<h1>404 Not Found</h1>" in str(web):
-            if num == "":
-                num = 1
-                url = "http://circuiturgellenc.com/bku1/index.php/component/k2/item/61-cinema-comtal.html"
-                os.system("curl -s -o cine.html " + url)
-                p = open("cine.html")
-                web = BeautifulSoup(p, "html.parser")
-            else:
-                num += 1
-                url = "http://circuiturgellenc.com/bku" + str(num) + "/index.php/component/k2/item/61-cinema-comtal.html"
-                os.system("curl -s -o cine.html " + url)
-                p = open("cine.html")
-                web = BeautifulSoup(p, "html.parser")
-
-        num = ""
-        resultat = web.findAll('img')
-        for i in resultat:
-            i = str(i)
-            if "_L.jpg" in i:
-                inici = i.index('src="') + 5
-                final = i.index('"', inici)
-                ruta = i[inici:final].replace("_L.jpg", "_XL.jpg")
-                #print (ruta)
-                os.system("wget -q http://circuiturgellenc.com%s -O cineripoll.jpg" % ruta)

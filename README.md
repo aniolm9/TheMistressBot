@@ -16,7 +16,5 @@ A part d'això cal afegir 3 directoris i el contingut que desitgeu:
 
 ### Dependències
 Per utilitzar-lo també cal instal·lar alguns mòduls de Python (recomano fer-ho en un entorn virtual):
- * beautifulsoup4
  * python-telegram-bot
-
-També utilitza l'ordre del sistema __curl__, hauríeu de tenir-la instal·lada per l'ordre __/cineripoll__.
+ * python3-wget
