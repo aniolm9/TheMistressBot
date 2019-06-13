@@ -11,11 +11,14 @@ def logs():
     logger = logging.getLogger(__name__)
     return logger
 
-def jobsManager(jobsqueue):
+def jobsManager(jobqueue):
+    # Run once when I start, after 20 seconds.
+    jobqueue.run_once(jobs.getCineRipoll, 20)
+
     # Cine Ripoll job. Every Thursday at 08:30 download the schedule.
     today = datetime.datetime(datetime.datetime.today().year, datetime.datetime.today().month, datetime.datetime.today().day, 8, 30, 0)
     next_thursday = today + datetime.timedelta(days=(3-today.weekday())%7)
-    jobsqueue.run_repeating(jobs.getCineRipoll, interval=next_thursday)
+    jobqueue.run_repeating(jobs.getCineRipoll, interval=next_thursday)
 
 def handlersProcess(updater, dispatcher):
     # Dictionary containing all the command handlers

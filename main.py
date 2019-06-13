@@ -9,7 +9,8 @@ except:
 def main():
     # Call the logs function to start logging.
     functions.logs()
-    # Create the Updater and pass the bot token;
+
+    # Create the Updater and pass the bot token.
     updater = Updater(token=TOKEN)
     dispatcher = updater.dispatcher
     jobqueue = updater.job_queue
