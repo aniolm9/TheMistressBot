@@ -6,10 +6,10 @@ Bot poc útil que utilitzem al grup dels col·legues.
 Ja he dit que no fa res útil, oi?
 
 ### Token
-Crear el fitxer __TOKEN__ amb una sola línia que sigui el token facilitat pel Botfather.
+Crear el fitxer `settings_secret.py` seguint les instruccions de `settings_secret.readme`.
 
 ### Directoris
-A part d'això cal afegir 3 directoris i el contingut que desitgeu:
+A part d'això cal afegir contingut als 3 directoris creats:
  * memes/
  * imatges/
  * sons/
@@ -17,4 +17,3 @@ A part d'això cal afegir 3 directoris i el contingut que desitgeu:
 ### Dependències
 Per utilitzar-lo també cal instal·lar alguns mòduls de Python (recomano fer-ho en un entorn virtual):
  * python-telegram-bot
- * python3-wget

@@ -1,7 +1,12 @@
 import os
-import requests
+import sys
 import json
+import requests
 import urllib.request
+try:
+    from settings_secret import *
+except:
+    sys.exit("Missing settings_secret.py file.")
 
 def getCineRipoll():
     # Get the HTML file.
@@ -10,9 +15,7 @@ def getCineRipoll():
     html = urllib.request.urlopen(urllib.request.Request(url, headers=headers)).read().decode('utf-8')
 
     # Convert the HTML to an image.
-    user_id = ""
-    api_key = ""
-    post_request = requests.post("https://hcti.io/v1/image", data={'html': html}, auth=(user_id, api_key))
+    post_request = requests.post("https://hcti.io/v1/image", data={'html': html}, auth=(USER_ID, API_KEY))
     image_url = post_request.json()["url"] + ".png"
 
     # Download the image.
