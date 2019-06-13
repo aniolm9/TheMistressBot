@@ -2,4 +2,4 @@ __pycache__/
 imatges/
 memes/
 sons/
-TOKEN
+settings_secret.py
