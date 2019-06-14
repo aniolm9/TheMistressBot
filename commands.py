@@ -55,6 +55,7 @@ def random_command(bot, update, args):
 
 def cineripoll(bot, update):
     bot.send_photo(chat_id=update.message.chat_id, photo=open("imatges/cineripoll.png", 'rb'), reply_to_message_id=update.message.message_id)
+    bot.send_document(chat_id=update.message.chat_id, document=open("imatges/cineripoll.png", 'rb'), reply_to_message_id=update.message.message_id)
 
 def meme(bot, update, args):
     files = functions.memes()
