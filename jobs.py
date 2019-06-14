@@ -1,5 +1,6 @@
 import os
 import sys
+import logging
 import requests
 import urllib.request
 try:
@@ -8,6 +9,7 @@ except:
     sys.exit("Missing settings_secret.py file.")
 
 def getCineRipoll(bot, job):
+    logging.info("Running getCineRipoll job.")
     # Get the HTML file.
     url = 'http://circusa.com/ca/ripoll/'
     headers = { 'User-Agent' : 'Mozilla/5.0 (Windows NT 6.1; Win64; x64)' }
@@ -23,3 +25,4 @@ def getCineRipoll(bot, job):
     f = open(image_file, "wb+")
     f.write(image_request.read())
     f.close()
+    logging.info("getCineRipoll job done.")
