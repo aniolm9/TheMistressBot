@@ -1,6 +1,5 @@
 import os
 import sys
-import json
 import requests
 import urllib.request
 try:
@@ -8,7 +7,7 @@ try:
 except:
     sys.exit("Missing settings_secret.py file.")
 
-def getCineRipoll():
+def getCineRipoll(bot, job):
     # Get the HTML file.
     url = 'http://circusa.com/ca/ripoll/'
     headers = { 'User-Agent' : 'Mozilla/5.0 (Windows NT 6.1; Win64; x64)' }

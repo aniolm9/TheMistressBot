@@ -12,13 +12,13 @@ def logs():
     return logger
 
 def jobsManager(jobqueue):
-    # Run once when I start, after 20 seconds.
-    jobqueue.run_once(jobs.getCineRipoll, 20)
+    # Run once when I start, after 5 seconds.
+    jobqueue.run_once(jobs.getCineRipoll, 5)
+    logging.info("Startup getCineRipoll job run.")
 
-    # Cine Ripoll job. Every Thursday at 08:30 download the schedule.
-    today = datetime.datetime(datetime.datetime.today().year, datetime.datetime.today().month, datetime.datetime.today().day, 8, 30, 0)
-    next_thursday = today + datetime.timedelta(days=(3-today.weekday())%7)
-    jobqueue.run_repeating(jobs.getCineRipoll, interval=next_thursday)
+    # Cine Ripoll job. Every day at 08:30 download the schedule.
+    jobqueue.run_daily(jobs.getCineRipoll, time=datetime.time(8, 30))
+    logging.info("Daily getCineRipoll job run.")
 
 def handlersProcess(updater, dispatcher):
     # Dictionary containing all the command handlers

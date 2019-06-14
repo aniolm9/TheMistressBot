@@ -15,11 +15,11 @@ def main():
     dispatcher = updater.dispatcher
     jobqueue = updater.job_queue
 
-    # Call the function that contains the handlers for the commands.
-    functions.handlersProcess(updater, dispatcher)
-
     # Call the function that controls the jobs.
     functions.jobsManager(jobqueue)
+
+    # Call the function that contains the handlers for the commands.
+    functions.handlersProcess(updater, dispatcher)
 
 # Rock it
 main()
